@@ -1,16 +1,16 @@
-name: Build and Pack EntityFrameworkCore
+name: Build and Pack GenericServices
 
 on:
   push:
     branches: [ main ]
-    paths: [ 'GestioneSagre.EFCore/**' ]
+    paths: [ 'GestioneSagre.GenericServices/**' ]
     workflow_dispatch:
       
       env:
         NET_VERSION: '6.x'
-        PROJECT_NAME: GestioneSagre.EFCore
-        PROJECT_FILE: GestioneSagre.EFCore.csproj
-        RELEASE_NAME: GestioneSagre.EFCore
+        PROJECT_NAME: GestioneSagre.GenericServices
+        PROJECT_FILE: GestioneSagre.GenericServices.csproj
+        RELEASE_NAME: GestioneSagre.GenericServices
         
         jobs:
           build:
