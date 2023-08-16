@@ -6,10 +6,10 @@
         <Product>Gestione sagre generic services library extension</Product>
         <Description>Open source dotnet generic services extension library for project gestione sagre</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/AngeloDotNet/GestioneSagreWeb</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/AngeloDotNet/GestioneSagreWeb.Tools</PackageProjectUrl>
         <PackageIcon>LibraryTools.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
-        <RepositoryUrl>https://github.com/AngeloDotNet/GestioneSagreWeb.git</RepositoryUrl>
+        <RepositoryUrl>https://github.com/AngeloDotNet/GestioneSagreWeb.Tools.git</RepositoryUrl>
         <RepositoryBranch>main</RepositoryBranch>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
@@ -22,6 +22,7 @@
     <ItemGroup>
         <PackageReference Include="AspNetCore.HealthChecks.Rabbitmq" Version="6.0.2" />
         <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
+        <PackageReference Include="AspNetCore.HealthChecks.System" Version="6.0.5" />
         <PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.5" />
         <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
         <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="6.0.5" />
