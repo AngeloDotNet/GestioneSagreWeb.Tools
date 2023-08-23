@@ -2,6 +2,8 @@
 
     <PropertyGroup>
         <TargetFrameworks>net6.0</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
         <Authors>Angelo Pirola</Authors>
         <Product>Gestione sagre entity framework core library extension</Product>
         <Description>Open source dotnet entity framework core extension library for project gestione sagre</Description>
@@ -11,8 +13,7 @@
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/AngeloDotNet/GestioneSagreWeb.Tools.git</RepositoryUrl>
         <RepositoryBranch>main</RepositoryBranch>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>disable</Nullable>
+
     </PropertyGroup>
 
     <ItemGroup>
