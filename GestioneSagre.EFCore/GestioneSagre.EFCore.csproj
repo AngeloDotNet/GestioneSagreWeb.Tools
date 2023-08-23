@@ -6,7 +6,7 @@
         <Product>Gestione sagre entity framework core library extension</Product>
         <Description>Open source dotnet entity framework core extension library for project gestione sagre</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/AngeloDotNet/GestioneSagreWeb.Tools</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/AngeloDotNet/GestioneSagreWeb.Tools/tree/main/GestioneSagre.EFCore</PackageProjectUrl>
         <PackageIcon>LibraryTools.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/AngeloDotNet/GestioneSagreWeb.Tools.git</RepositoryUrl>
