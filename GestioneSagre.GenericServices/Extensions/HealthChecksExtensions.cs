@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace GestioneSagre.GenericServices.Extensions;
@@ -24,5 +25,27 @@ public static class HealthChecksExtensions
         });
 
         return endpoints;
+    }
+
+    public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services, string apiServiceUrl, string apiServiceName,
+        string[] tags, string connStringSeq, string SeqApiKey)
+    {
+        //services.AddHealthChecks()
+        //    .AddCheck("self", () => HealthCheckResult.Healthy())
+        //    .AddSqlServer(connectionString: "Server=(localdb)\\mssqllocaldb;Database=aspnet-GestioneSagre-1E0F4B9C-5F5A-4F1F-9F0A-0F1F1F1F1F1F;Trusted_Connection=True;MultipleActiveResultSets=true",
+        //    healthQuery: "SELECT 1;", name: "GestioneSagreDB-check", failureStatus: HealthStatus.Degraded, tags: new string[] { "db", "sql", "sqlserver" });
+
+        services.AddHealthChecks()
+            .AddProcessAllocatedMemoryHealthCheck(100, name: "Allocated Memory")
+            .AddUrlGroup(new Uri(apiServiceUrl), apiServiceName, HealthStatus.Degraded, tags)
+            .AddSeqPublisher(setup: options =>
+            {
+                options.Endpoint = connStringSeq;
+                options.ApiKey = SeqApiKey;
+                options.DefaultInputLevel = HealthChecks.Publisher.Seq.SeqInputLevel.Information;
+            }, name: "Seq Publisher");
+        //.AddRedis(connStringRedis, "Redis Check", HealthStatus.Degraded, new string[] { "infrastructure", "redis" });
+
+        return services;
     }
 }
