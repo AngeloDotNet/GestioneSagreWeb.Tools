@@ -44,7 +44,6 @@ public static class HealthChecksExtensions
                 options.ApiKey = SeqApiKey;
                 options.DefaultInputLevel = HealthChecks.Publisher.Seq.SeqInputLevel.Information;
             }, name: "Seq Publisher");
-        //.AddRedis(connStringRedis, "Redis Check", HealthStatus.Degraded, new string[] { "infrastructure", "redis" });
 
         return services;
     }
