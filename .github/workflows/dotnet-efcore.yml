@@ -12,6 +12,7 @@ env:
   PROJECT_FILE: GestioneSagre.EFCore.csproj
   TAG_NAME: EFCore
   RELEASE_NAME: GestioneSagre.EFCore
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
   
 jobs:
   build:
