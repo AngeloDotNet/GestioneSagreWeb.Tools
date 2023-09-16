@@ -16,7 +16,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
     }
 
     public async Task<List<TEntity>> GetItemsAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-        Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
+        Expression<Func<TEntity, bool>> conditionWhere, CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
@@ -25,9 +25,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
             query = includes(query);
         }
 
-        if (condition != null)
+        if (conditionWhere != null)
         {
-            query = query.Where(condition);
+            query = query.Where(conditionWhere);
         }
 
         return await query
@@ -70,7 +70,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
     }
 
     public async Task<TEntity> GetItemByIdAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-        Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
+        Expression<Func<TEntity, bool>> conditionWhere, CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
@@ -79,9 +79,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
             query = includes(query);
         }
 
-        if (condition != null)
+        if (conditionWhere != null)
         {
-            query = query.Where(condition);
+            query = query.Where(conditionWhere);
         }
 
         return await query
@@ -90,7 +90,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
     }
 
     public async Task<int> GetItemsCountAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-        Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
+        Expression<Func<TEntity, bool>> conditionWhere, CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
@@ -99,9 +99,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
             query = includes(query);
         }
 
-        if (condition != null)
+        if (conditionWhere != null)
         {
-            query = query.Where(condition);
+            query = query.Where(conditionWhere);
         }
 
         return await query
