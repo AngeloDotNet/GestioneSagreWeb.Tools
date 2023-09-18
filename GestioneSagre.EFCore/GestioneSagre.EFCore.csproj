@@ -13,7 +13,6 @@
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/AngeloDotNet/GestioneSagreWeb.Tools.git</RepositoryUrl>
         <RepositoryBranch>main</RepositoryBranch>
-
     </PropertyGroup>
 
     <ItemGroup>
