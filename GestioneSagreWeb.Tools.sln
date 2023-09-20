@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneSagre.EFCore", "Ges
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneSagre.GenericServices", "GestioneSagre.GenericServices\GestioneSagre.GenericServices.csproj", "{69C3BE05-1106-4FC1-91CB-463AEDBEE7AB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneSagre.ProblemDetails", "GestioneSagre.ProblemDetails\GestioneSagre.ProblemDetails.csproj", "{ED2E4174-DE77-407E-8BD7-7375032E30C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestioneSagre.ProblemDetails.Tests", "GestioneSagre.ProblemDetails.Tests\GestioneSagre.ProblemDetails.Tests.csproj", "{3E579738-46C9-4CAB-A074-FB9DC9CEED56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,19 @@ Global
 		{69C3BE05-1106-4FC1-91CB-463AEDBEE7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69C3BE05-1106-4FC1-91CB-463AEDBEE7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69C3BE05-1106-4FC1-91CB-463AEDBEE7AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED2E4174-DE77-407E-8BD7-7375032E30C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED2E4174-DE77-407E-8BD7-7375032E30C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED2E4174-DE77-407E-8BD7-7375032E30C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED2E4174-DE77-407E-8BD7-7375032E30C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E579738-46C9-4CAB-A074-FB9DC9CEED56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E579738-46C9-4CAB-A074-FB9DC9CEED56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E579738-46C9-4CAB-A074-FB9DC9CEED56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E579738-46C9-4CAB-A074-FB9DC9CEED56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1496F88-E3E7-444E-934B-69644FD4DBA8}
 	EndGlobalSection
 EndGlobal
