@@ -7,6 +7,7 @@ namespace GestioneSagre.ProblemDetails.Tests;
 public class Tests
 {
     private MockRepository mockRepository;
+    private string expectedErrorMessage = string.Empty;
 
     [SetUp]
     public void Setup()
@@ -20,17 +21,25 @@ public class Tests
         mockRepository.VerifyAll();
     }
 
-    private NotFoundException CreateNotFoundException()
-    {
-        return new NotFoundException("Not Found Exception");
-    }
+    private static NotFoundException CreateNotFoundException() => new NotFoundException(message: "Not Found Exception");
+
+    private static BadRequestException CreateBadRequestException() => new BadRequestException(message: "Bad Request Exception");
 
     [Test]
     public void Should_Throw_NotFoundException()
     {
-        var expectedErrorMessage = "Not Found Exception";
-        var ex = Assert.Throws<NotFoundException>(() => throw this.CreateNotFoundException());
+        expectedErrorMessage = "Not Found Exception";
+        var exception = Assert.Throws<NotFoundException>(() => throw CreateNotFoundException());
 
-        Assert.That(ex.Message, Is.EqualTo(expectedErrorMessage));
+        Assert.That(exception.Message, Is.EqualTo(expectedErrorMessage));
+    }
+
+    [Test]
+    public void Should_Throw_BadRequestException()
+    {
+        expectedErrorMessage = "Bad Request Exception";
+        var exception = Assert.Throws<BadRequestException>(() => throw CreateBadRequestException());
+
+        Assert.That(exception.Message, Is.EqualTo(expectedErrorMessage));
     }
 }
