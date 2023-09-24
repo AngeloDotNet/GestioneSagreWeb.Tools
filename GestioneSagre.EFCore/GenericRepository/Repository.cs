@@ -111,22 +111,45 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
 
     public async Task CreateAsync(TEntity entity, CancellationToken cancellationToken)
     {
-        using var transaction = DbContext.Database.BeginTransaction();
+        //using var transaction = DbContext.Database.BeginTransaction();
 
-        try
+        //try
+        //{
+        //    DbContext.Set<TEntity>().Add(entity);
+
+        //    await DbContext.SaveChangesAsync(cancellationToken);
+
+        //    DbContext.Entry(entity).State = EntityState.Detached;
+
+        //    await transaction.CommitAsync(cancellationToken);
+        //}
+        //catch
+        //{
+        //    await transaction.RollbackAsync(cancellationToken);
+        //}
+
+        //Solution: https://stackoverflow.com/questions/59526881/using-system-transaction-how-to-update-multiple-rows-in-entity-framework
+        var executionStrategy = DbContext.Database.CreateExecutionStrategy();
+
+        await executionStrategy.Execute(async () =>
         {
-            DbContext.Set<TEntity>().Add(entity);
+            using var transaction = DbContext.Database.BeginTransaction();
 
-            await DbContext.SaveChangesAsync(cancellationToken);
+            try
+            {
+                DbContext.Set<TEntity>().Add(entity);
 
-            DbContext.Entry(entity).State = EntityState.Detached;
+                await DbContext.SaveChangesAsync(cancellationToken);
 
-            await transaction.CommitAsync(cancellationToken);
-        }
-        catch
-        {
-            await transaction.RollbackAsync(cancellationToken);
-        }
+                DbContext.Entry(entity).State = EntityState.Detached;
+
+                await transaction.CommitAsync(cancellationToken);
+            }
+            catch
+            {
+                await transaction.RollbackAsync(cancellationToken);
+            }
+        });
     }
 
     public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken)
