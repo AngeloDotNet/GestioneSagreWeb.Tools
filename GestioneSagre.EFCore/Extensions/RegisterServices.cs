@@ -16,7 +16,7 @@ public static class RegisterServices
             {
                 // Abilito il connection resiliency (Provider di SQL Server è soggetto a errori transienti)
                 // Info su: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
-                options.EnableRetryOnFailure(3);
+                //options.EnableRetryOnFailure(3);
                 options.MigrationsAssembly(typeof(TDbContext).Assembly.FullName);
             });
         });
