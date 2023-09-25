@@ -15,8 +15,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
         DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
 
-    public async Task<List<TEntity>> GetItemsAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-        Expression<Func<TEntity, bool>> conditionWhere, CancellationToken cancellationToken = default)
+    public async Task<List<TEntity>> GetItemsAsync(Func<IQueryable<TEntity>,
+        IIncludableQueryable<TEntity, object>> includes, Expression<Func<TEntity, bool>> conditionWhere,
+        CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
@@ -35,9 +36,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<List<TEntity>> GetOrderedItemsAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-        Expression<Func<TEntity, bool>> conditionWhere, Expression<Func<TEntity, dynamic>> orderBy,
-        OrderType orderType = OrderType.Ascending, CancellationToken cancellationToken = default)
+    public async Task<List<TEntity>> GetOrderedItemsAsync(Func<IQueryable<TEntity>,
+        IIncludableQueryable<TEntity, object>> includes, Expression<Func<TEntity, bool>> conditionWhere,
+        Expression<Func<TEntity, dynamic>> orderBy, OrderType orderType = OrderType.Ascending,
+        CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
@@ -69,8 +71,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<TEntity> GetItemByIdAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-        Expression<Func<TEntity, bool>> conditionWhere, CancellationToken cancellationToken = default)
+    public async Task<TEntity> GetItemByIdAsync(Func<IQueryable<TEntity>,
+        IIncludableQueryable<TEntity, object>> includes, Expression<Func<TEntity, bool>> conditionWhere,
+        CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
@@ -89,8 +92,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
             .FirstOrDefaultAsync(cancellationToken);
     }
 
-    public async Task<int> GetItemsCountAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-        Expression<Func<TEntity, bool>> conditionWhere, CancellationToken cancellationToken = default)
+    public async Task<int> GetItemsCountAsync(Func<IQueryable<TEntity>,
+        IIncludableQueryable<TEntity, object>> includes, Expression<Func<TEntity, bool>> conditionWhere,
+        CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
@@ -111,24 +115,6 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
 
     public async Task CreateAsync(TEntity entity, CancellationToken cancellationToken)
     {
-        //using var transaction = DbContext.Database.BeginTransaction();
-
-        //try
-        //{
-        //    DbContext.Set<TEntity>().Add(entity);
-
-        //    await DbContext.SaveChangesAsync(cancellationToken);
-
-        //    DbContext.Entry(entity).State = EntityState.Detached;
-
-        //    await transaction.CommitAsync(cancellationToken);
-        //}
-        //catch
-        //{
-        //    await transaction.RollbackAsync(cancellationToken);
-        //}
-
-        //Solution: https://stackoverflow.com/questions/59526881/using-system-transaction-how-to-update-multiple-rows-in-entity-framework
         var executionStrategy = DbContext.Database.CreateExecutionStrategy();
 
         await executionStrategy.Execute(async () =>
@@ -154,39 +140,49 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
 
     public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken)
     {
-        using var transaction = DbContext.Database.BeginTransaction();
+        var executionStrategy = DbContext.Database.CreateExecutionStrategy();
 
-        try
+        await executionStrategy.Execute(async () =>
         {
-            DbContext.Set<TEntity>().Update(entity);
+            using var transaction = DbContext.Database.BeginTransaction();
 
-            await DbContext.SaveChangesAsync(cancellationToken);
+            try
+            {
+                DbContext.Set<TEntity>().Update(entity);
 
-            DbContext.Entry(entity).State = EntityState.Detached;
+                await DbContext.SaveChangesAsync(cancellationToken);
 
-            await transaction.CommitAsync(cancellationToken);
-        }
-        catch
-        {
-            await transaction.RollbackAsync(cancellationToken);
-        }
+                DbContext.Entry(entity).State = EntityState.Detached;
+
+                await transaction.CommitAsync(cancellationToken);
+            }
+            catch
+            {
+                await transaction.RollbackAsync(cancellationToken);
+            }
+        });
     }
 
     public async Task DeleteAsync(TEntity entity, CancellationToken cancellationToken)
     {
-        using var transaction = DbContext.Database.BeginTransaction();
+        var executionStrategy = DbContext.Database.CreateExecutionStrategy();
 
-        try
+        await executionStrategy.Execute(async () =>
         {
-            DbContext.Set<TEntity>().Remove(entity);
+            using var transaction = DbContext.Database.BeginTransaction();
 
-            await DbContext.SaveChangesAsync(cancellationToken);
+            try
+            {
+                DbContext.Set<TEntity>().Remove(entity);
 
-            await transaction.CommitAsync(cancellationToken);
-        }
-        catch
-        {
-            await transaction.RollbackAsync(cancellationToken);
-        }
+                await DbContext.SaveChangesAsync(cancellationToken);
+
+                await transaction.CommitAsync(cancellationToken);
+            }
+            catch
+            {
+                await transaction.RollbackAsync(cancellationToken);
+            }
+        });
     }
 }
