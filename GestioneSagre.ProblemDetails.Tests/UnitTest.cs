@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace GestioneSagre.ProblemDetails.Tests;
 
-public class Tests
+public class UnitTest
 {
     private MockRepository mockRepository;
     private string expectedErrorMessage = string.Empty;
@@ -22,8 +22,8 @@ public class Tests
     }
 
     private static NotFoundException CreateNotFoundException() => new NotFoundException(message: "Not Found Exception");
-
     private static BadRequestException CreateBadRequestException() => new BadRequestException(message: "Bad Request Exception");
+    private static NotModifiedException CreateNotModifiedException() => new NotModifiedException(message: "Not Modified Exception");
 
     [Test]
     public void Should_Throw_NotFoundException()
@@ -39,6 +39,15 @@ public class Tests
     {
         expectedErrorMessage = "Bad Request Exception";
         var exception = Assert.Throws<BadRequestException>(() => throw CreateBadRequestException());
+
+        Assert.That(exception.Message, Is.EqualTo(expectedErrorMessage));
+    }
+
+    [Test]
+    public void Should_Throw_NotModifiedException()
+    {
+        expectedErrorMessage = "Not Modified Exception";
+        var exception = Assert.Throws<NotModifiedException>(() => throw CreateNotModifiedException());
 
         Assert.That(exception.Message, Is.EqualTo(expectedErrorMessage));
     }
