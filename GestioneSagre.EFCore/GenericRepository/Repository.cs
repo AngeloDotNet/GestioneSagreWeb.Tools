@@ -15,65 +15,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
         DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
 
-    //public async Task<List<TEntity>> GetItemsAsync(Func<IQueryable<TEntity>,
-    //    IIncludableQueryable<TEntity, object>> includes, Expression<Func<TEntity, bool>> conditionWhere,
-    //    CancellationToken cancellationToken = default)
-    //{
-    //    IQueryable<TEntity> query = DbContext.Set<TEntity>();
-
-    //    if (includes != null)
-    //    {
-    //        query = includes(query);
-    //    }
-
-    //    if (conditionWhere != null)
-    //    {
-    //        query = query.Where(conditionWhere);
-    //    }
-
-    //    return await query
-    //        .AsNoTracking()
-    //        .ToListAsync(cancellationToken);
-    //}
-
-    //public async Task<List<TEntity>> GetOrderedItemsAsync(Func<IQueryable<TEntity>,
-    //    IIncludableQueryable<TEntity, object>> includes, Expression<Func<TEntity, bool>> conditionWhere,
-    //    Expression<Func<TEntity, dynamic>> orderBy, OrderType orderType = OrderType.Ascending,
-    //    CancellationToken cancellationToken = default)
-    //{
-    //    IQueryable<TEntity> query = DbContext.Set<TEntity>();
-
-    //    if (includes != null)
-    //    {
-    //        query = includes(query);
-    //    }
-
-    //    if (conditionWhere != null)
-    //    {
-    //        query = query.Where(conditionWhere);
-    //    }
-
-    //    if (orderBy != null)
-    //    {
-    //        switch (orderType)
-    //        {
-    //            case OrderType.Ascending:
-    //                query = query.OrderBy(orderBy);
-    //                break;
-    //            case OrderType.Descending:
-    //                query = query.OrderByDescending(orderBy);
-    //                break;
-    //        }
-    //    }
-
-    //    return await query
-    //        .AsNoTracking()
-    //        .ToListAsync(cancellationToken);
-    //}
-
-    public async Task<List<TEntity>> GetItemsAsync(Func<IQueryable<TEntity>,
-        IIncludableQueryable<TEntity, object>> includes, Expression<Func<TEntity, bool>> conditionWhere,
-        Expression<Func<TEntity, dynamic>> orderBy, OrderType orderType = OrderType.Ascending,
+    public async Task<List<TEntity>> GetItemsAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
+        Expression<Func<TEntity, bool>> conditionWhere, Expression<Func<TEntity, dynamic>> orderBy, OrderType orderType = OrderType.Ascending,
         CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> query = DbContext.Set<TEntity>();
@@ -102,14 +45,13 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
             }
         }
 
-        return await query
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
+        var result = await query.AsNoTracking().ToListAsync(cancellationToken);
+
+        return result;
     }
 
-    public async Task<TEntity> GetItemByIdAsync(Func<IQueryable<TEntity>,
-        IIncludableQueryable<TEntity, object>> includes, Expression<Func<TEntity, bool>> conditionWhere,
-        CancellationToken cancellationToken = default)
+    public async Task<TEntity> GetItemByIdAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
+        Expression<Func<TEntity, bool>> conditionWhere, CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
@@ -123,14 +65,13 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
             query = query.Where(conditionWhere);
         }
 
-        return await query
-            .AsNoTracking()
-            .FirstOrDefaultAsync(cancellationToken);
+        var result = await query.AsNoTracking().FirstOrDefaultAsync(cancellationToken);
+
+        return result;
     }
 
-    public async Task<int> GetItemsCountAsync(Func<IQueryable<TEntity>,
-        IIncludableQueryable<TEntity, object>> includes, Expression<Func<TEntity, bool>> conditionWhere,
-        CancellationToken cancellationToken = default)
+    public async Task<int> GetItemsCountAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
+        Expression<Func<TEntity, bool>> conditionWhere, CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
@@ -144,81 +85,60 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, n
             query = query.Where(conditionWhere);
         }
 
-        return await query
-            .AsNoTracking()
-            .CountAsync(cancellationToken);
+        var result = await query.AsNoTracking().CountAsync(cancellationToken);
+
+        return result;
     }
 
-    public async Task CreateAsync(TEntity entity, CancellationToken cancellationToken)
+    public async Task<bool> CreateAsync(TEntity entity, CancellationToken cancellationToken)
     {
-        //var executionStrategy = DbContext.Database.CreateExecutionStrategy();
+        try
+        {
+            DbContext.Set<TEntity>().Add(entity);
 
-        //await executionStrategy.Execute(async () =>
-        //{
-        //    using var transaction = DbContext.Database.BeginTransaction();
+            await DbContext.SaveChangesAsync(cancellationToken);
 
-        //    try
-        //    {
-        DbContext.Set<TEntity>().Add(entity);
+            DbContext.Entry(entity).State = EntityState.Detached;
 
-        await DbContext.SaveChangesAsync(cancellationToken);
-
-        DbContext.Entry(entity).State = EntityState.Detached;
-
-        //        await transaction.CommitAsync(cancellationToken);
-        //    }
-        //    catch
-        //    {
-        //        await transaction.RollbackAsync(cancellationToken);
-        //    }
-        //});
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
-    public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken)
+    public async Task<bool> UpdateAsync(TEntity entity, CancellationToken cancellationToken)
     {
-        //var executionStrategy = DbContext.Database.CreateExecutionStrategy();
+        try
+        {
+            DbContext.Set<TEntity>().Update(entity);
 
-        //await executionStrategy.Execute(async () =>
-        //{
-        //    using var transaction = DbContext.Database.BeginTransaction();
+            await DbContext.SaveChangesAsync(cancellationToken);
 
-        //    try
-        //    {
-        DbContext.Set<TEntity>().Update(entity);
+            DbContext.Entry(entity).State = EntityState.Detached;
 
-        await DbContext.SaveChangesAsync(cancellationToken);
-
-        DbContext.Entry(entity).State = EntityState.Detached;
-
-        //        await transaction.CommitAsync(cancellationToken);
-        //    }
-        //    catch
-        //    {
-        //        await transaction.RollbackAsync(cancellationToken);
-        //    }
-        //});
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
-    public async Task DeleteAsync(TEntity entity, CancellationToken cancellationToken)
+    public async Task<bool> DeleteAsync(TEntity entity, CancellationToken cancellationToken)
     {
-        //var executionStrategy = DbContext.Database.CreateExecutionStrategy();
+        try
+        {
+            DbContext.Set<TEntity>().Remove(entity);
 
-        //await executionStrategy.Execute(async () =>
-        //{
-        //    using var transaction = DbContext.Database.BeginTransaction();
+            await DbContext.SaveChangesAsync(cancellationToken);
 
-        //    try
-        //    {
-        DbContext.Set<TEntity>().Remove(entity);
-
-        await DbContext.SaveChangesAsync(cancellationToken);
-
-        //        await transaction.CommitAsync(cancellationToken);
-        //    }
-        //    catch
-        //    {
-        //        await transaction.RollbackAsync(cancellationToken);
-        //    }
-        //});
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
