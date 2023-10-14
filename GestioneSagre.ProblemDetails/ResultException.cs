@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using GestioneSagre.ProblemDetails.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +9,7 @@ public static class ResultException
     public static ObjectResult NotFound(HttpContext httpContext, System.Exception exc)
     {
         var statusCode = StatusCodes.Status404NotFound;
-        var problemDetails = new CustomProblemDetails
+        var problemDetails = new Microsoft.AspNetCore.Mvc.ProblemDetails
         {
             Status = statusCode,
             Type = $"https://httpstatuses.com/{statusCode}",
@@ -32,7 +31,7 @@ public static class ResultException
     public static ObjectResult BadRequest(HttpContext httpContext, System.Exception exc)
     {
         var statusCode = StatusCodes.Status400BadRequest;
-        var problemDetails = new CustomProblemDetails
+        var problemDetails = new Microsoft.AspNetCore.Mvc.ProblemDetails
         {
             Status = statusCode,
             Type = $"https://httpstatuses.com/{statusCode}",
@@ -54,7 +53,7 @@ public static class ResultException
     public static ObjectResult NotModified(HttpContext httpContext, System.Exception exc)
     {
         var statusCode = StatusCodes.Status304NotModified;
-        var problemDetails = new CustomProblemDetails
+        var problemDetails = new Microsoft.AspNetCore.Mvc.ProblemDetails
         {
             Status = statusCode,
             Type = $"https://httpstatuses.com/{statusCode}",
@@ -76,7 +75,7 @@ public static class ResultException
     public static ObjectResult NotAcceptable(HttpContext httpContext, System.Exception exc)
     {
         var statusCode = StatusCodes.Status406NotAcceptable;
-        var problemDetails = new CustomProblemDetails
+        var problemDetails = new Microsoft.AspNetCore.Mvc.ProblemDetails
         {
             Status = statusCode,
             Type = $"https://httpstatuses.com/{statusCode}",
@@ -98,7 +97,7 @@ public static class ResultException
     public static ObjectResult Conflict(HttpContext httpContext, System.Exception exc)
     {
         var statusCode = StatusCodes.Status409Conflict;
-        var problemDetails = new CustomProblemDetails
+        var problemDetails = new Microsoft.AspNetCore.Mvc.ProblemDetails
         {
             Status = statusCode,
             Type = $"https://httpstatuses.com/{statusCode}",
@@ -120,7 +119,7 @@ public static class ResultException
     public static ObjectResult UnprocessableEntity(HttpContext httpContext, System.Exception exc)
     {
         var statusCode = StatusCodes.Status422UnprocessableEntity;
-        var problemDetails = new CustomProblemDetails
+        var problemDetails = new Microsoft.AspNetCore.Mvc.ProblemDetails
         {
             Status = statusCode,
             Type = $"https://httpstatuses.com/{statusCode}",
