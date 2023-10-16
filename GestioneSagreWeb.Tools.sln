@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneSagre.GenericServic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneSagre.ProblemDetails", "GestioneSagre.ProblemDetails\GestioneSagre.ProblemDetails.csproj", "{ED2E4174-DE77-407E-8BD7-7375032E30C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneSagre.ProblemDetails.Tests", "GestioneSagre.ProblemDetails.Tests\GestioneSagre.ProblemDetails.Tests.csproj", "{3E579738-46C9-4CAB-A074-FB9DC9CEED56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneSagre.Shared", "GestioneSagre.Shared\GestioneSagre.Shared.csproj", "{1EA7044D-9E92-4709-BF3C-D2A218F04799}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{ED2E4174-DE77-407E-8BD7-7375032E30C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED2E4174-DE77-407E-8BD7-7375032E30C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED2E4174-DE77-407E-8BD7-7375032E30C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E579738-46C9-4CAB-A074-FB9DC9CEED56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E579738-46C9-4CAB-A074-FB9DC9CEED56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E579738-46C9-4CAB-A074-FB9DC9CEED56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E579738-46C9-4CAB-A074-FB9DC9CEED56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EA7044D-9E92-4709-BF3C-D2A218F04799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EA7044D-9E92-4709-BF3C-D2A218F04799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EA7044D-9E92-4709-BF3C-D2A218F04799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EA7044D-9E92-4709-BF3C-D2A218F04799}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
