@@ -51,24 +51,6 @@ public static class OperationResultExtensions
 
                     return createdAtRouteResult;
                 }
-                //else if (result.Content is StreamFileContent streamFileContent)
-                //{
-                //    var fileStreamResult = new FileStreamResult(streamFileContent.Content, streamFileContent.ContentType)
-                //    {
-                //        FileDownloadName = streamFileContent.DownloadFileName,
-                //    };
-
-                //    return fileStreamResult;
-                //}
-                //else if (result.Content is ByteArrayFileContent byteArrayFileContent)
-                //{
-                //    var fileContentResult = new FileContentResult(byteArrayFileContent.Content, byteArrayFileContent.ContentType)
-                //    {
-                //        FileDownloadName = byteArrayFileContent.DownloadFileName
-                //    };
-
-                //    return fileContentResult;
-                //}
 
                 var okResult = new ObjectResult(result.Content)
                 {
