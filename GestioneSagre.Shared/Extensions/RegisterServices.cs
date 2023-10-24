@@ -74,20 +74,4 @@ public static class RegisterServices
 
         return services;
     }
-
-    // Use this if you need to dinamically change the message, i.e., based on user culture.
-    //public static IServiceCollection AddOperationResultValidationError(this IServiceCollection services)
-    //{
-    //    services.AddOperationResult(options =>
-    //    {
-    //        options.StatusCodesMapping.Add(CustomFailureReasons.NotModified, StatusCodes.Status304NotModified);
-    //        options.StatusCodesMapping.Add(CustomFailureReasons.NotAcceptable, StatusCodes.Status406NotAcceptable);
-    //        options.StatusCodesMapping.Add(CustomFailureReasons.UnprocessableEntity, StatusCodes.Status422UnprocessableEntity);
-    //        options.StatusCodesMapping.Add(CustomFailureReasons.NotImplemented, StatusCodes.Status501NotImplemented);
-    //    },
-
-    //    validationErrorMessageProvider: (state) => Messages.ValidationErrorMessage);
-
-    //    return services;
-    //}
 }
