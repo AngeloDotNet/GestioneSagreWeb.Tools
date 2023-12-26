@@ -31,8 +31,8 @@
         <PackageReference Include="AspNetCore.HealthChecks.UI.SqlServer.Storage" Version="6.0.5" />
         <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.3" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.24" />
-        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.24" />
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.25" />
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.25" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
         <PackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
             <PrivateAssets>all</PrivateAssets>
@@ -42,7 +42,7 @@
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
         <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
-        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
         <PackageReference Include="Serilog.Sinks.Seq" Version="6.0.0" />
     </ItemGroup>
